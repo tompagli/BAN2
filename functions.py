@@ -1,28 +1,28 @@
 
 from time import strftime
 from unittest.util import strclass
-import classes
+from classes import *
 import psycopg2
 
 def insert(table):
-    connection=psycopg2.connect("dbname=gravadora user=postgres password=udesc")
-    cursor=connection.cursor()
-    if table=='1': ##instrumento
-        nome = str(input())
+    connection=psycopg2.connect("dbname=gravadora user=postgres password=udesc") ## conexao com o bd
+    cursor=connection.cursor() ## sei la eu 
+    if table==1 : ##instrumento
+        nome = str(input()) ## input do q entra na tupla
         cod_interno = int(input())
-        cursor.execute("INSERT INTO Instrumento VALUES(%s,%d)", (nome,cod_interno))
+        cursor.execute("INSERT INTO Instrumento VALUES(%s,%s)", (nome,cod_interno)) ##injetar os valores na tabela
         connection.commit()
-    if table=='2': ##tocar
+    if table==2 : ##tocar
         cod_int = int(input())
         cod_mus = int(input())
-        cursor.execute("INSERT INTO tocar VALUES(%d,%d)", (cod_int,cod_mus))
+        cursor.execute("INSERT INTO tocar VALUES(%s,%s)", (cod_int,cod_mus))
         connection.commit()
-    if table=='3': ##musica
+    if table==3 : ##musica
         titulom = str(input())
         autor = str(input())
         cod_mus = int(input())
         cod_dis = int(input())
-        cursor.execute("INSERT INTO Musica VALUES(%s,%s,%d,%d)", (titulom,autor,cod_mus,cod_dis))
+        cursor.execute("INSERT INTO Musica VALUES(%s,%s,%s,%s)", (titulom,autor,cod_mus,cod_dis))
         connection.commit()
     if table == '4': ##disco
         titulod = str(input())
@@ -31,7 +31,7 @@ def insert(table):
         formato = str(input())
         cod_mus = int(input())
         cod_b = int(input())
-        cursor.execute("INSERT INTO Disco VALUES(%s,%d)", (titulod,data,id,formato,cod_mus,cod_b))
+        cursor.execute("INSERT INTO Disco VALUES(%s,%s,%s,%s,%s,%s)", (titulod,data,id,formato,cod_mus,cod_b))
         connection.commit()
     if table == '5': ##musico
         nome = str(input())
@@ -58,11 +58,3 @@ def insert(table):
         cursor.execute("INSERT INTO Produtor VALUES (%d,%d,%d)",(cod_mus,cod_dis,codp))
         connection.commit()
     connection.close()
-
-def view():
-    connection=psycopg2.connect("dbname=gravadora user=postgres password=udesc")
-    cursor=connection.cursor()
-    cursor.execute("SELECT * FROM store")
-    rows=cursor.fetchall()
-    connection.close()
-    return rows
