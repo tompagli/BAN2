@@ -6,7 +6,6 @@ class instrumento:
     def __init__(self,nome,cod_interno):
      self.nome = nome
      self.cod_interno = cod_interno
-     def __str__(self): return self.nome
 lista_instrumento = []
 
 class tocar:
