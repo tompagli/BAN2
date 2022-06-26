@@ -4,19 +4,18 @@ from unittest.util import strclass
 import psycopg2
 from classes import *
 
-def init():
-    lista_instrumento = view(1)
-    lista_tocar = view(2)
-    lista_musica = view(3)
-    lista_disco = view(4)
-    lista_musico = view(5)
-    lista_endereco = view(6)
-    lista_banda = view(7)
-    lista_produtor = view(8)
+lista_instrumento = []
+lista_tocar = []
+lista_musica = []
+lista_disco = []
+lista_musico = []
+lista_endereco = []
+lista_banda = []
+lista_produtor = []
 
 def insert(table):
     connection=psycopg2.connect("dbname=gravadora user=postgres password=udesc") ## conexao com o bd
-    cursor=connection.cursor() ## sei la eu 
+    cursor=connection.cursor() 
     if table== 1 : ##instrumento
         nome = str(input()) ## input do q entra na tupla
         cod_interno = int(input())
@@ -115,7 +114,6 @@ def view(table):
     cursor.execute("SELECT * FROM " + table)
     rows=cursor.fetchall()
     connection.close()
-    print(rows)
     return rows
 
 def separa_por_parametro(lista,campo,valor):
@@ -124,3 +122,15 @@ def separa_por_parametro(lista,campo,valor):
         if getattr(x,campo) ==valor:
             lista_separada.append(x)
     return lista_separada
+   
+lista_instrumento = view('Instrumento')
+lista_tocar = view('tocar')
+lista_musica = view('Musica')
+lista_disco = view('Disco')
+lista_musico = view('Musico')
+lista_endereco = view('Endereco')
+lista_banda = view('Banda')
+lista_produtor = view('Produtor')
+
+print(lista_instrumento)
+
