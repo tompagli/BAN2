@@ -16,7 +16,7 @@ lista_produtor = []
 def insert(table,dados):
     connection=psycopg2.connect("dbname=gravadora user=postgres password=udesc") ## conexao com o bd
     cursor=connection.cursor() 
-    if table == 1 : ##instrumento
+    if table == 'Instrumento' : ##instrumento
 
         dados_l = dados.split(",")
         nome = dados_l[0] #str(input()) ## input do q entra na tupla
@@ -28,7 +28,7 @@ def insert(table,dados):
         instrumento_instance = instrumento(nome,cod_interno)
         lista_instrumento.append(instrumento_instance)
 
-    if table== 2 : ##tocar
+    if table == 'tocar' : ##tocar
 
         dados_l = dados.split(",")
         cod_int = int(dados_l[0]) 
@@ -40,7 +40,7 @@ def insert(table,dados):
         tocar_instance = tocar(cod_int,cod_mus)
         lista_tocar.append(tocar_instance)
 
-    if table== 3 : ##musica
+    if table == 'Musica' : ##musica
 
         dados_l = dados.split(",")
         titulom = dados_l[0] #str(input()) ## input do q entra na tupla
@@ -54,7 +54,7 @@ def insert(table,dados):
         musica_instance = musica(titulom,autor,cod_mus,cod_dis)
         lista_musica.append(musica_instance)
 
-    if table == 4 : ##disco
+    if table == 'Disco' : ##disco
 
         dados_l = dados.split(",")
         titulod = str(dados_l[0]) #str(input()) ## input do q entra na tupla
@@ -70,7 +70,7 @@ def insert(table,dados):
         disco_instance = disco(titulod,data,id,formato,cod_mus,cod_b)
         lista_disco.append(disco_instance)
 
-    if table == 5 : ##musico
+    if table == 'Musico' : ##musico
         
         dados_l = dados.split(",")
         nome = str(dados_l[0])
@@ -84,7 +84,7 @@ def insert(table,dados):
         musico_instance = musico(nome,n_regs,num_tel,n_casa)
         lista_musico.append(musico_instance)
 
-    if table == 6 : ## endereco
+    if table == 'Endereco' : ## endereco
         dados_l = dados.split(",")
         casa = int(dados_l[0]) 
         telefone= int(dados_l[1]) 
@@ -95,7 +95,7 @@ def insert(table,dados):
         endereco_instance = endereco(casa,telefone)
         lista_endereco.append(endereco_instance)
 
-    if table == 7 : ## banda 
+    if table == 'Banda' : ## banda 
         dados_l = dados.split(",")
         codb = int(dados_l[0]) 
         cod_mus= int(dados_l[1])
@@ -107,7 +107,7 @@ def insert(table,dados):
         banda_instance = banda(codb,cod_mus,nome)
         lista_banda.append(banda_instance)
 
-    if table == 8 : ## produtor
+    if table == 'Produtor' : ## produtor
 
         dados_l = dados.split(",")
         cod_mus = int(dados_l[0]) 
@@ -142,11 +142,12 @@ lista_produtor = view('Produtor')
 def separa_por_parametro(lista,campo,valor):
     lista_separada = []
     lista = globals()["lista_"+lista]
-    print(lista)
+    if valor=='':
+        return lista
     for x in lista:
         if getattr(x,campo) ==valor:
             lista_separada.append(x)
-    return lista_separada
+        return lista_separada
 
    
 

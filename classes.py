@@ -1,4 +1,3 @@
-
 import datetime
 from mailbox import NotEmptyError
 
@@ -17,6 +16,7 @@ class instrumento:
         return self.nome +" | "+ str(self.cod_interno)
 
 
+
 class tocar:
     def __init__(self,cod_int,cod_mus):
         self.cod_int = cod_int
@@ -26,6 +26,10 @@ class tocar:
         for x in lista_tuplas_database:
             lista_ret.append(tocar(x[0],x[1]))
         return lista_ret
+    def __str__(self):
+        return str(self.cod_int) +" | "+ str(self.cod_mus)
+    def __repr__(self):
+        return str(self.cod_int) +" | "+ str(self.cod_mus)
 
 
 class musica:
@@ -39,6 +43,10 @@ class musica:
         for x in lista_tuplas_database:
             lista_ret.append(musica(x[0],x[1],x[2],x[3]))
         return lista_ret
+    def __str__(self):
+        return self.titulom +" | "+ self.autor +" | "+self.cod_mus +" | "+self.cod_dis
+    def __repr__(self):
+        return self.titulom +" | "+ self.autor +" | "+self.cod_mus +" | "+self.cod_dis
 
 class disco:
     def __init__(self,titulod,data,id,formato,cod_mus,cod_b):
@@ -53,6 +61,10 @@ class disco:
         for x in lista_tuplas_database:
             lista_ret.append(disco(x[0],x[1],x[2],x[3],x[4],x[5]))
         return lista_ret
+    def __str__(self):
+        return self.titulod +" | "+ self.data +" | "+self.id +" | "+self.formato +" | "+ self.cod_mus +" | "+ self.cod_b
+    def __repr__(self):
+        return self.titulod +" | "+ self.data +" | "+self.id +" | "+self.formato +" | "+ self.cod_mus +" | "+ self.cod_b
 
 class musico:
     def __init__(self,nome,n_regs,num_tel,n_casa):
@@ -60,12 +72,15 @@ class musico:
         self.n_regs = n_regs
         self.num_tel = num_tel
         self.n_casa = n_casa
-
     def build(lista_tuplas_database):
         lista_ret = []
         for x in lista_tuplas_database:
             lista_ret.append(musico(x[0],x[1],x[2],x[3]))
         return lista_ret
+    def __str__(self):
+        return self.nome +" | "+ self.n_regs +" | "+self.num_tel +" | "+self.n_casa
+    def __repr__(self):
+        return self.nome +" | "+ self.n_regs +" | "+self.num_tel +" | "+self.n_casa
 
 class endereco:
     def __init__(self,casa,telefone):
@@ -77,6 +92,10 @@ class endereco:
         for x in lista_tuplas_database:
             lista_ret.append(endereco(x[0],x[1]))
         return lista_ret
+    def __str__(self):
+        return self.casa +" | "+ self.telefone
+    def __repr__(self):
+        return self.casa +" | "+ self.telefone
 
 class banda:
     def __init__(self,codb,cod_mus,nome):
@@ -89,6 +108,10 @@ class banda:
         for x in lista_tuplas_database:
             lista_ret.append(banda(x[0],x[1],x[2]))
         return lista_ret
+    def __str__(self):
+        return self.codb +" | "+ self.cod_mus +" | "+self.nome
+    def __repr__(self):
+        return self.codb +" | "+ self.cod_mus +" | "+self.nome
 
 class produtor:
     def __init__(self,codp,cod_mus,cod_dis):
@@ -101,3 +124,7 @@ class produtor:
         for x in lista_tuplas_database:
             lista_ret.append(produtor(x[0],x[1],x[2]))
         return lista_ret
+    def __str__(self):
+        return self.cod_mus +" | "+ self.cod_dis +" | "+self.codp
+    def __repr__(self):
+        return self.cod_mus +" | "+ self.cod_dis +" | "+self.codp

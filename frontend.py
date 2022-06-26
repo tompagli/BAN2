@@ -2,7 +2,7 @@
 import tkinter as tk
 import tkinter.ttk as ttk
 
-from functions import separa_por_parametro
+from functions import insert, separa_por_parametro
 
 
 def open_insert():
@@ -92,7 +92,7 @@ class InsertDados:
         self.label6.configure(text="Nao esqueca de separar os valores com virgula")
         self.label6.place(anchor="nw", x=100, y=150)
         self.buttonInsertConfirm = ttk.Button(self.frame2)
-        self.buttonInsertConfirm.configure(text="Confirmar")
+        self.buttonInsertConfirm.configure(text="Confirmar",command=self.get_insert)
         self.buttonInsertConfirm.place(anchor="nw", x=300, y=180)
         self.label7 = ttk.Label(self.frame2)
         self.label7.configure(text="Se quiser voltar ao menu inicial")
@@ -106,6 +106,11 @@ class InsertDados:
         self.toplevel2.geometry("480x320")
         # Main widget
         self.mainwindow = self.toplevel2
+    def get_insert(self):
+     tabela = self.table_entry.get()
+     valores = self.entry_values.get()
+     insert(tabela,valores)
+    
     def quit(self):
      self.mainwindow.destroy()
 
