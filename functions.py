@@ -20,7 +20,7 @@ def insert(table,dados):
 
         dados_l = dados.split(",")
         nome = dados_l[0] #str(input()) ## input do q entra na tupla
-        cod_interno = int(dados_l[1]) # int(input())
+        cod_interno = dados_l[1] # int(input())
 
         cursor.execute("INSERT INTO Instrumento VALUES(%s,%s)", (nome,cod_interno)) ##injetar os valores na tabela
         connection.commit()
@@ -146,5 +146,4 @@ lista_endereco = view('Endereco')
 lista_banda = view('Banda')
 lista_produtor = view('Produtor')
 
-insert(1,'Cavaco,1')
 

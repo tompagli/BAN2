@@ -2,51 +2,17 @@
 import tkinter as tk
 import tkinter.ttk as ttk
 
-class MainMenu:
-    def __init__(self, master=None):
-        # build ui
-        self.frameMenuInicial = tk.Tk()##(master, container="false")
-        self.frameMenuInicial.title('My Title')
-        self.frame1 = tk.Frame(self.frameMenuInicial)
-        self.text2 = tk.Text(self.frame1)
-        self.text2.configure(
-            autoseparators="false", cursor="arrow", exportselection="true", height=4
-        )
-        self.text2.configure(relief="flat", state="normal", width=40)
-        _text_ = "Olá usuário, bem vindo a aplicação de   manipulação de dados SQL,qual opção te  interessa?"
-        self.text2.insert("0.0", _text_)
-        self.text2.pack(anchor="center", expand="false", pady=20, side="top")
-        self.buttonInsert = tk.Button(self.frame1)
-        self.SelectInsert = tk.StringVar(value="Inserção")
-        self.buttonInsert.configure(text="Inserção", textvariable=self.SelectInsert)
-        self.buttonInsert.place(anchor="nw", width=150, x=50, y=160)
-        self.buttonConsulta = tk.Button(self.frame1)
-        self.SelectConsulta = tk.StringVar(value="Consulta")
-        self.buttonConsulta.configure(
-            takefocus=False, text="Consulta", textvariable=self.SelectConsulta
-        )
-        self.buttonConsulta.place(anchor="nw", width=150, x=250, y=160)
-        self.frame1.configure(cursor="arrow", height=200, width=200)
-        self.frame1.place(
-            anchor="nw", height=320, relx=0.0, rely=0.0, width=480, x=0, y=0
-        )
-        self.frameMenuInicial.configure(height=200, relief="flat", takefocus=False, width=200)
-        self.frameMenuInicial.geometry("480x320")
-        self.frameMenuInicial.title("Database App")
 
-        # Main widget
-        self.mainwindow = self.frameMenuInicial
+def open_insert():
+     app = InsertDados()
+     app.run()
 
-    def run(self):
-       self.mainwindow.mainloop()
-
-
-if __name__ == "__main__":
-    app = MainMenu()
+def open_consulta():
+    app = Menu_Select()
     app.run()
 
-
-
+def volta_menu():
+    app.quit(InsertDados)
 
 class Menu_Select:
     def __init__(self, master=None):
@@ -90,9 +56,9 @@ class Menu_Select:
         self.mainwindow.mainloop()
 
 
-if __name__ == "__main__":
-    app = Menu_Select()
-    app.run()
+## if __name__ == "__main__":
+##    app = Menu_Select()
+##    app.run()
 
 
 class InsertDados:
@@ -124,23 +90,25 @@ class InsertDados:
         self.label7.configure(text="Se quiser voltar ao menu inicial")
         self.label7.place(anchor="nw", x=150, y=220)
         self.buttonVoltar = ttk.Button(self.frame2)
-        self.buttonVoltar.configure(text="Voltar")
+        self.buttonVoltar.configure(text="Voltar",command=self.quit)
         self.buttonVoltar.place(anchor="nw", x=300, y=250)
         self.frame2.configure(height=200, width=200)
         self.frame2.pack(expand="true", fill="both", side="top")
         self.toplevel2.configure(height=480, takefocus=False, width=320)
         self.toplevel2.geometry("480x320")
-
         # Main widget
         self.mainwindow = self.toplevel2
+    def quit(self):
+     self.mainwindow.destroy()
 
     def run(self):
         self.mainwindow.mainloop()
-
+    
 class RetornoConsulta:
     def __init__(self, master=None):
         # build ui
         self.RetornoConsulta = tk.Tk() if master is None else tk.Toplevel(master)
+        self.RetornoConsulta.title("Retorno da Consulta")
         self.frameResultadoCons = ttk.Frame(self.RetornoConsulta)
         self.resultadoConsulta_text = tk.Text(self.frameResultadoCons)
         self.resultadoConsulta_text.configure(
@@ -151,7 +119,7 @@ class RetornoConsulta:
         self.resultadoConsultaLabel.configure(text="Resultado da consulta")
         self.resultadoConsultaLabel.place(anchor="nw", x=190, y=100)
         self.button4 = ttk.Button(self.frameResultadoCons)
-        self.button4.configure(text="Voltar")
+        self.button4.configure(text="Voltar",command=self.quit)
         self.button4.place(anchor="nw", x=300, y=220)
         self.frameResultadoCons.configure(height=200, width=200)
         self.frameResultadoCons.pack(expand="true", fill="both", side="top")
@@ -160,15 +128,60 @@ class RetornoConsulta:
 
         # Main widget
         self.mainwindow = self.RetornoConsulta
-
+    def quit(self):
+     self.mainwindow.destroy()
     def run(self):
         self.mainwindow.mainloop()
 
 
-if __name__ == "__main__":
-    app = RetornoConsulta()
-    app.run()
+## if __name__ == "__main__":
+##    app = RetornoConsulta()
+##    app.run()
+
+##if __name__ == "__main__":
+##   app = InsertDados()
+##    app.run()
+class MainMenu:
+    def __init__(self, master=None):
+        # build ui
+        self.frameMenuInicial = tk.Tk()##(master, container="false")
+        self.frameMenuInicial.title('My Title')
+        self.frame1 = tk.Frame(self.frameMenuInicial)
+        self.text2 = tk.Text(self.frame1)
+        self.text2.configure(
+            autoseparators="false", cursor="arrow", exportselection="true", height=4
+        )
+        self.text2.configure(relief="flat", state="normal", width=40)
+        _text_ = "Olá usuário, bem vindo a aplicação de   manipulação de dados SQL,qual opção te  interessa?"
+        self.text2.insert("0.0", _text_)
+        self.text2.pack(anchor="center", expand="false", pady=20, side="top")
+        self.buttonInsert = tk.Button(self.frame1)
+        self.SelectInsert = tk.StringVar(value="Inserção")
+        self.buttonInsert.configure(text="Inserção", textvariable=self.SelectInsert)
+        self.buttonInsert.configure(command=open_insert)
+        self.buttonInsert.place(anchor="nw", width=150, x=50, y=160)
+        self.buttonConsulta = tk.Button(self.frame1)
+        self.buttonConsulta.configure(command=open_consulta)
+        self.SelectConsulta = tk.StringVar(value="Consulta")
+        self.buttonConsulta.configure(
+            takefocus=False, text="Consulta", textvariable=self.SelectConsulta
+        )
+        self.buttonConsulta.place(anchor="nw", width=150, x=250, y=160)
+        self.frame1.configure(cursor="arrow", height=200, width=200)
+        self.frame1.place(
+            anchor="nw", height=320, relx=0.0, rely=0.0, width=480, x=0, y=0
+        )
+        self.frameMenuInicial.configure(height=200, relief="flat", takefocus=False, width=200)
+        self.frameMenuInicial.geometry("480x320")
+        self.frameMenuInicial.title("Database App")
+
+        # Main widget
+        self.mainwindow = self.frameMenuInicial
+
+    def run(self):
+       self.mainwindow.mainloop()
+
 
 if __name__ == "__main__":
-    app = InsertDados()
+    app = MainMenu()
     app.run()

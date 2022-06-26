@@ -1,5 +1,4 @@
-##essa buxa##
-## fazer em python pq java é um porre##
+
 
 from pip import main
 from classes import *
