@@ -14,14 +14,6 @@ def init():
     lista_banda = view(7)
     lista_produtor = view(8)
 
-def separa_por_parametro(lista,campo,valor):
-    lista_separada = []
-    for x in lista:
-        if getattr(x,campo) ==valor:
-            lista_separada.append(x)
-    return lista_separada
-
-
 def insert(table):
     connection=psycopg2.connect("dbname=gravadora user=postgres password=udesc") ## conexao com o bd
     cursor=connection.cursor() ## sei la eu 
@@ -114,7 +106,7 @@ def insert(table):
 
         produtor_instance = produtor(cod_mus,cod_dis,codp)
         lista_produtor.append(produtor_instance)
-        
+
     connection.close()
 
 def view(table):
@@ -126,3 +118,9 @@ def view(table):
     print(rows)
     return rows
 
+def separa_por_parametro(lista,campo,valor):
+    lista_separada = []
+    for x in lista:
+        if getattr(x,campo) ==valor:
+            lista_separada.append(x)
+    return lista_separada
