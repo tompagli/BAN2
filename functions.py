@@ -1,9 +1,14 @@
+#==========================
+#==========================
 
 from time import strftime
 from unittest.util import strclass
 import psycopg2
 from classes import *
 
+#==========================
+#==========================
+## lista dos objetos
 lista_instrumento = []
 lista_tocar = []
 lista_musica = []
@@ -12,6 +17,9 @@ lista_musico = []
 lista_endereco = []
 lista_banda = []
 lista_produtor = []
+
+#==========================
+#==========================
 
 def insert(table,dados):
     connection=psycopg2.connect("dbname=gravadora user=postgres password=udesc") ## conexao com o bd
@@ -122,6 +130,9 @@ def insert(table,dados):
 
     connection.close()
 
+#==========================
+#==========================
+##funcao para consulta no bd
 def view(table):
     connection=psycopg2.connect("dbname=gravadora user=postgres password=udesc")
     cursor=connection.cursor()
@@ -129,6 +140,11 @@ def view(table):
     rows=cursor.fetchall()
     connection.close()
     return rows
+
+#==========================
+#==========================
+
+##builder de objetos baseado no bd
 
 lista_instrumento = instrumento.build(view('Instrumento'))
 lista_tocar = tocar.build(view('tocar'))
@@ -139,19 +155,21 @@ lista_endereco = endereco.build(view('Endereco'))
 lista_banda = banda.build(view('Banda'))
 lista_produtor = produtor.build(view('Produtor'))
 
+#==========================
+#==========================
+##funcao para procura por parametro(campo,valor)##
+
 def separa_por_parametro(lista,campo,valor):
     if lista != 'tocar':
-        lista=lista[0].lower()+lista[1:]
+        lista=lista[0].lower()+lista[1:]        ##resolve problema do minusculo
     lista_separada = []
     lista = globals()["lista_"+lista]
-    if valor=='':
+    if valor=='':                           ##valor vazio volta geral
         return lista
-    for x in lista:
+    for x in lista:                                 ##cria uma lista dos valores
         if getattr(x,campo) ==valor:
             lista_separada.append(x)
         return lista_separada
 
-   
-
-
-
+#==========================
+#==========================

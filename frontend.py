@@ -1,30 +1,30 @@
 
-import tkinter as tk
+import tkinter as tk ## importando os modulos
 import tkinter.ttk as ttk
 
-from functions import insert, separa_por_parametro
+from functions import insert, separa_por_parametro ##importando as funcoes
 
-
+#==========================
 def open_insert():
-     app = InsertDados()
+     app = InsertDados() ##chamada da janela de insercao
      app.run()
 
 def open_consulta():
-    app = Menu_Select()
-    app.run()
+    app = Menu_Select() ##chamada da janela de consulta
+    app.run()  
 
-def volta_menu():
-    app.quit(InsertDados)
-
-class Menu_Select:
+#==========================
+#==========================
+#==========================
+class Menu_Select: ##menu de consulta
     def __init__(self, master=None):
         # build ui
         self.Menu_Select = tk.Tk() if master is None else tk.Toplevel(master)
-        self.Menu_Select.title("Consultas Avancadas")
+        self.Menu_Select.title("Consultas Avancadas") ## titulo da janela, diferentes blocos
         self.frame1 = ttk.Frame(self.Menu_Select)
         self.text1 = tk.Text(self.frame1)
         self.text1.configure(height=2, width=50)
-        _text_ = "Bem vindo ao menu de consultas avançadas, escolha:"
+        _text_ = "Bem vindo ao menu de consultas avançadas, escolha:" 
         self.text1.insert("0.0", _text_)
         self.text1.place(anchor="nw", x=40, y=20)
         self.select_table = ttk.Entry(self.frame1)
@@ -43,7 +43,7 @@ class Menu_Select:
         self.label3.configure(text="Valor")
         self.label3.place(anchor="nw", x=340, y=180)
         self.botao_con_avan = ttk.Button(self.frame1)
-        self.botao_con_avan.configure(text="Consulte!",command=self.get_table)
+        self.botao_con_avan.configure(text="Consulte!",command=self.get_table) ##funcao de pegar todas os valores para consulta
         self.botao_con_avan.place(anchor="nw", x=300, y=250)
         self.frame1.configure(height=480, width=320)
         self.frame1.pack(fill="both", side="top")
@@ -52,9 +52,9 @@ class Menu_Select:
         self.Menu_Select.geometry("480x320")
 
         # Main widget
-        self.mainwindow = self.Menu_Select
+        self.mainwindow = self.Menu_Select 
     
-    def get_table(self):
+    def get_table(self):                  ##funcao que pega valores, insere em uma lista e faz a chamada de uma nova janela
      tables = self.select_table.get()
      campos = self.select_campo.get()
      values = self.select_value.get() 
@@ -63,13 +63,11 @@ class Menu_Select:
     def run(self):
         self.mainwindow.mainloop()
 
+#==========================
+#==========================
+#==========================
 
-## if __name__ == "__main__":
-##    app = Menu_Select()
-##    app.run()
-
-
-class InsertDados:
+class InsertDados:                               ##janela para insercao de dados na database
     def __init__(self, master=None):
         # build ui
         self.toplevel2 = tk.Tk() if master is None else tk.Toplevel(master)
@@ -106,18 +104,22 @@ class InsertDados:
         self.toplevel2.geometry("480x320")
         # Main widget
         self.mainwindow = self.toplevel2
-    def get_insert(self):
+    def get_insert(self):                            ##funcao para pegar os valores para a insercao
      tabela = self.table_entry.get()
      valores = self.entry_values.get()
-     insert(tabela,valores)
+     insert(tabela,valores)            ##chamada de insercao
     
     def quit(self):
-     self.mainwindow.destroy()
+     self.mainwindow.destroy()         ##quit ao voltar
 
     def run(self):
         self.mainwindow.mainloop()
+
+#==========================
+#==========================
+#==========================
     
-class RetornoConsulta:
+class RetornoConsulta:                #Classe para printar a consulta avancada
     def __init__(self,parametro, master=None):
         # build ui
         self.parametro = parametro
@@ -127,7 +129,8 @@ class RetornoConsulta:
         self.resultadoConsultaLabel = ttk.Label(self.frameResultadoCons)
         self.resultadoConsultaLabel.configure(text="Resultado da consulta")
         self.resultadoConsultaLabel.place(anchor="nw", x=190, y=90)
-        #==========================
+
+#==========================
 
         x_a=190
         y_a=120
@@ -137,11 +140,8 @@ class RetornoConsulta:
             self.resultadoConsultaessabuxa.place(anchor="nw", x=x_a,y=y_a)
             y_a+=30
         
-        #============================
+#==========================
 
-        ##self.resultadoConsultaessabuxa = ttk.Label(self.frameResultadoCons)
-        ###self.resultadoConsultaessabuxa.configure(text=self.parametro)
-        ###self.resultadoConsultaessabuxa.place(anchor="nw", x=190, y=120)
         self.button4 = ttk.Button(self.frameResultadoCons)
         self.button4.configure(text="Voltar",command=self.quit)
         self.button4.place(anchor="nw", x=300, y=220)
@@ -157,15 +157,10 @@ class RetornoConsulta:
     def run(self):
         self.mainwindow.mainloop()
 
+#==========================
+#==========================
 
-## if __name__ == "__main__":
-##    app = RetornoConsulta()
-##    app.run()
-
-##if __name__ == "__main__":
-##   app = InsertDados()
-##    app.run()
-class MainMenu:
+class MainMenu: ##classe para menu principal
     def __init__(self, master=None):
         # build ui
         self.frameMenuInicial = tk.Tk()##(master, container="false")
@@ -204,8 +199,5 @@ class MainMenu:
 
     def run(self):
        self.mainwindow.mainloop()
-
-
-if __name__ == "__main__":
-    app = MainMenu()
-    app.run()
+#==========================
+#==========================

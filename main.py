@@ -10,9 +10,6 @@ import psycopg2
 from functions import *
 from frontend import *
 
-
-conn = psycopg2.connect("dbname=gravadora user=postgres password=udesc")
-
 if __name__ == "__main__":
     app = MainMenu()
     app.run()
