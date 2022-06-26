@@ -1,8 +1,26 @@
 
 from time import strftime
 from unittest.util import strclass
-from classes import *
 import psycopg2
+from classes import *
+
+def init():
+    lista_instrumento = view(1)
+    lista_tocar = view(2)
+    lista_musica = view(3)
+    lista_disco = view(4)
+    lista_musico = view(5)
+    lista_endereco = view(6)
+    lista_banda = view(7)
+    lista_produtor = view(8)
+
+def separa_por_parametro(lista,campo,valor):
+    lista_separada = []
+    for x in lista:
+        if getattr(x,campo) ==valor:
+            lista_separada.append(x)
+    return lista_separada
+
 
 def insert(table):
     connection=psycopg2.connect("dbname=gravadora user=postgres password=udesc") ## conexao com o bd
@@ -10,8 +28,13 @@ def insert(table):
     if table== 1 : ##instrumento
         nome = str(input()) ## input do q entra na tupla
         cod_interno = int(input())
+        
         cursor.execute("INSERT INTO Instrumento VALUES(%s,%s)", (nome,cod_interno)) ##injetar os valores na tabela
         connection.commit()
+        
+        instrumento_instance = instrumento(nome,cod_interno)
+        lista_instrumento.append(instrumento_instance)
+
     if table== 2 : ##tocar
         cod_int = int(input())
         cod_mus = int(input())
@@ -58,3 +81,13 @@ def insert(table):
         cursor.execute("INSERT INTO Produtor VALUES (%d,%d,%d)",(cod_mus,cod_dis,codp))
         connection.commit()
     connection.close()
+
+def view(table):
+    connection=psycopg2.connect("dbname=gravadora user=postgres password=udesc")
+    cursor=connection.cursor()
+    cursor.execute("SELECT * FROM " + table)
+    rows=cursor.fetchall()
+    connection.close()
+    print(rows)
+    return rows
+
