@@ -2,6 +2,8 @@
 import tkinter as tk
 import tkinter.ttk as ttk
 
+from functions import separa_por_parametro
+
 
 def open_insert():
      app = InsertDados()
@@ -41,7 +43,7 @@ class Menu_Select:
         self.label3.configure(text="Valor")
         self.label3.place(anchor="nw", x=340, y=180)
         self.botao_con_avan = ttk.Button(self.frame1)
-        self.botao_con_avan.configure(text="Consulte!")
+        self.botao_con_avan.configure(text="Consulte!",command=self.get_table)
         self.botao_con_avan.place(anchor="nw", x=300, y=250)
         self.frame1.configure(height=480, width=320)
         self.frame1.pack(fill="both", side="top")
@@ -51,7 +53,13 @@ class Menu_Select:
 
         # Main widget
         self.mainwindow = self.Menu_Select
-
+    
+    def get_table(self):
+     tables = self.select_table.get()
+     campos = self.select_campo.get()
+     values = self.select_value.get() 
+     consulta_lista = separa_por_parametro(tables,campos,values)
+     varwhat = RetornoConsulta(consulta_lista).run()
     def run(self):
         self.mainwindow.mainloop()
 
@@ -105,19 +113,30 @@ class InsertDados:
         self.mainwindow.mainloop()
     
 class RetornoConsulta:
-    def __init__(self, master=None):
+    def __init__(self,parametro, master=None):
         # build ui
+        self.parametro = parametro
         self.RetornoConsulta = tk.Tk() if master is None else tk.Toplevel(master)
         self.RetornoConsulta.title("Retorno da Consulta")
         self.frameResultadoCons = ttk.Frame(self.RetornoConsulta)
-        self.resultadoConsulta_text = tk.Text(self.frameResultadoCons)
-        self.resultadoConsulta_text.configure(
-            font="TkDefaultFont", height=5, tabstyle="tabular", width=50
-        )
-        self.resultadoConsulta_text.place(anchor="nw", x=90, y=120)
         self.resultadoConsultaLabel = ttk.Label(self.frameResultadoCons)
         self.resultadoConsultaLabel.configure(text="Resultado da consulta")
-        self.resultadoConsultaLabel.place(anchor="nw", x=190, y=100)
+        self.resultadoConsultaLabel.place(anchor="nw", x=190, y=90)
+        #==========================
+
+        x_a=190
+        y_a=120
+        for x in self.parametro:
+            self.resultadoConsultaessabuxa = ttk.Label(self.frameResultadoCons)
+            self.resultadoConsultaessabuxa.configure(text=x)
+            self.resultadoConsultaessabuxa.place(anchor="nw", x=x_a,y=y_a)
+            y_a+=30
+        
+        #============================
+
+        ##self.resultadoConsultaessabuxa = ttk.Label(self.frameResultadoCons)
+        ###self.resultadoConsultaessabuxa.configure(text=self.parametro)
+        ###self.resultadoConsultaessabuxa.place(anchor="nw", x=190, y=120)
         self.button4 = ttk.Button(self.frameResultadoCons)
         self.button4.configure(text="Voltar",command=self.quit)
         self.button4.place(anchor="nw", x=300, y=220)

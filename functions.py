@@ -130,14 +130,7 @@ def view(table):
     connection.close()
     return rows
 
-def separa_por_parametro(lista,campo,valor):
-    lista_separada = []
-    for x in lista:
-        if getattr(x,campo) ==valor:
-            lista_separada.append(x)
-    return lista_separada
-   
-lista_instrumento = view('Instrumento')
+lista_instrumento = instrumento.build(view('Instrumento'))
 lista_tocar = view('tocar')
 lista_musica = view('Musica')
 lista_disco = view('Disco')
@@ -145,5 +138,17 @@ lista_musico = view('Musico')
 lista_endereco = view('Endereco')
 lista_banda = view('Banda')
 lista_produtor = view('Produtor')
+
+def separa_por_parametro(lista,campo,valor):
+    lista_separada = []
+    lista = globals()["lista_"+lista]
+    print(lista)
+    for x in lista:
+        if getattr(x,campo) ==valor:
+            lista_separada.append(x)
+    return lista_separada
+
+   
+
 
 
