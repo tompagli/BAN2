@@ -31,8 +31,8 @@ def insert(table,dados):
     if table == 'tocar' : ##tocar
 
         dados_l = dados.split(",")
-        cod_int = int(dados_l[0]) 
-        cod_mus= int(dados_l[1]) 
+        cod_int = str(dados_l[0]) 
+        cod_mus= str(dados_l[1]) 
 
         cursor.execute("INSERT INTO tocar VALUES(%s,%s)", (cod_int,cod_mus))
         connection.commit()
@@ -45,8 +45,8 @@ def insert(table,dados):
         dados_l = dados.split(",")
         titulom = dados_l[0] #str(input()) ## input do q entra na tupla
         autor = dados_l[1] # int(input())
-        cod_mus= int(dados_l[2])
-        cod_dis= int(dados_l[3])
+        cod_mus= (dados_l[2])
+        cod_dis= (dados_l[3])
 
         cursor.execute("INSERT INTO Musica VALUES(%s,%s,%s,%s)", (titulom,autor,cod_mus,cod_dis))
         connection.commit()
@@ -57,12 +57,12 @@ def insert(table,dados):
     if table == 'Disco' : ##disco
 
         dados_l = dados.split(",")
-        titulod = str(dados_l[0]) #str(input()) ## input do q entra na tupla
+        titulod = (dados_l[0]) #str(input()) ## input do q entra na tupla
         data = strftime(dados_l[1]) # int(input())
-        id = int(dados_l[2])
-        formato = str(dados_l[3])
-        cod_mus = int(dados_l[4])
-        cod_b = int(dados_l[5])
+        id = (dados_l[2])
+        formato = (dados_l[3])
+        cod_mus = (dados_l[4])
+        cod_b = (dados_l[5])
 
         cursor.execute("INSERT INTO Disco VALUES(%s,%s,%s,%s,%s,%s)", (titulod,data,id,formato,cod_mus,cod_b))
         connection.commit()
@@ -73,12 +73,12 @@ def insert(table,dados):
     if table == 'Musico' : ##musico
         
         dados_l = dados.split(",")
-        nome = str(dados_l[0])
-        n_regs = int(dados_l[1])
-        num_tel = int(dados_l[2]) 
-        n_casa = int(dados_l[3])
+        nome = (dados_l[0])
+        n_regs = (dados_l[1])
+        num_tel = (dados_l[2]) 
+        n_casa = (dados_l[3])
 
-        cursor.execute("INSERT INTO Musico VALUES(%s,%d,%d,%d)", (nome,n_regs,num_tel,n_casa))
+        cursor.execute("INSERT INTO Musico VALUES(%s,%s,%s,%s)", (nome,n_regs,num_tel,n_casa))
         connection.commit()
 
         musico_instance = musico(nome,n_regs,num_tel,n_casa)
@@ -86,10 +86,10 @@ def insert(table,dados):
 
     if table == 'Endereco' : ## endereco
         dados_l = dados.split(",")
-        casa = int(dados_l[0]) 
-        telefone= int(dados_l[1]) 
+        casa = (dados_l[0]) 
+        telefone= (dados_l[1]) 
 
-        cursor.execute("INSERT INTO Endereco VALUES(%d,%d)", (casa,telefone))
+        cursor.execute("INSERT INTO Endereco VALUES(%s,%s)", (casa,telefone))
         connection.commit()
 
         endereco_instance = endereco(casa,telefone)
@@ -97,11 +97,11 @@ def insert(table,dados):
 
     if table == 'Banda' : ## banda 
         dados_l = dados.split(",")
-        codb = int(dados_l[0]) 
-        cod_mus= int(dados_l[1])
-        nome = str(dados_l[2])
+        codb = (dados_l[0]) 
+        cod_mus= (dados_l[1])
+        nome = (dados_l[2])
 
-        cursor.execute("INSERT INTO Banda VALUES(%d,%d,%s)",(codb,cod_mus,nome))
+        cursor.execute("INSERT INTO Banda VALUES(%s,%s,%s)",(codb,cod_mus,nome))
         connection.commit()
 
         banda_instance = banda(codb,cod_mus,nome)
@@ -110,11 +110,11 @@ def insert(table,dados):
     if table == 'Produtor' : ## produtor
 
         dados_l = dados.split(",")
-        cod_mus = int(dados_l[0]) 
-        cod_dis = int(dados_l[1]) 
-        codp = int(dados_l[3])
+        cod_mus = (dados_l[0]) 
+        cod_dis = (dados_l[1]) 
+        codp = (dados_l[3])
 
-        cursor.execute("INSERT INTO Produtor VALUES (%d,%d,%d)",(cod_mus,cod_dis,codp))
+        cursor.execute("INSERT INTO Produtor VALUES (%s,%s,%s)",(cod_mus,cod_dis,codp))
         connection.commit()
 
         produtor_instance = produtor(cod_mus,cod_dis,codp)
