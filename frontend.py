@@ -1,5 +1,4 @@
 
-#!/usr/bin/python3
 import tkinter as tk
 import tkinter.ttk as ttk
 
@@ -53,6 +52,7 @@ class Menu_Select:
     def __init__(self, master=None):
         # build ui
         self.Menu_Select = tk.Tk() if master is None else tk.Toplevel(master)
+        self.Menu_Select.title("Consultas Avancadas")
         self.frame1 = ttk.Frame(self.Menu_Select)
         self.text1 = tk.Text(self.frame1)
         self.text1.configure(height=2, width=50)
@@ -94,16 +94,12 @@ if __name__ == "__main__":
     app = Menu_Select()
     app.run()
 
-#!/usr/bin/python3
-import tkinter as tk
-import tkinter.ttk as ttk
-
 
 class InsertDados:
     def __init__(self, master=None):
         # build ui
         self.toplevel2 = tk.Tk() if master is None else tk.Toplevel(master)
-        self.toplevel2.title('My Title')
+        self.toplevel2.title('Insercao nas tabelas')
         self.frame2 = ttk.Frame(self.toplevel2)
         self.label4 = ttk.Label(self.frame2)
         self.label4.configure(text="Inserção: Selecione qual tabela você quer inserir")
@@ -141,6 +137,37 @@ class InsertDados:
     def run(self):
         self.mainwindow.mainloop()
 
+class RetornoConsulta:
+    def __init__(self, master=None):
+        # build ui
+        self.RetornoConsulta = tk.Tk() if master is None else tk.Toplevel(master)
+        self.frameResultadoCons = ttk.Frame(self.RetornoConsulta)
+        self.resultadoConsulta_text = tk.Text(self.frameResultadoCons)
+        self.resultadoConsulta_text.configure(
+            font="TkDefaultFont", height=5, tabstyle="tabular", width=50
+        )
+        self.resultadoConsulta_text.place(anchor="nw", x=90, y=120)
+        self.resultadoConsultaLabel = ttk.Label(self.frameResultadoCons)
+        self.resultadoConsultaLabel.configure(text="Resultado da consulta")
+        self.resultadoConsultaLabel.place(anchor="nw", x=190, y=100)
+        self.button4 = ttk.Button(self.frameResultadoCons)
+        self.button4.configure(text="Voltar")
+        self.button4.place(anchor="nw", x=300, y=220)
+        self.frameResultadoCons.configure(height=200, width=200)
+        self.frameResultadoCons.pack(expand="true", fill="both", side="top")
+        self.RetornoConsulta.configure(height=200, width=200)
+        self.RetornoConsulta.geometry("480x320")
+
+        # Main widget
+        self.mainwindow = self.RetornoConsulta
+
+    def run(self):
+        self.mainwindow.mainloop()
+
+
+if __name__ == "__main__":
+    app = RetornoConsulta()
+    app.run()
 
 if __name__ == "__main__":
     app = InsertDados()
