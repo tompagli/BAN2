@@ -1,11 +1,14 @@
 
+#!/usr/bin/python3
 import tkinter as tk
+import tkinter.ttk as ttk
 
 class MainMenu:
     def __init__(self, master=None):
         # build ui
-        self.toplevel1 = tk.Toplevel(master, container="false")
-        self.frame1 = tk.Frame(self.toplevel1)
+        self.frameMenuInicial = tk.Tk()##(master, container="false")
+        self.frameMenuInicial.title('My Title')
+        self.frame1 = tk.Frame(self.frameMenuInicial)
         self.text2 = tk.Text(self.frame1)
         self.text2.configure(
             autoseparators="false", cursor="arrow", exportselection="true", height=4
@@ -24,21 +27,121 @@ class MainMenu:
             takefocus=False, text="Consulta", textvariable=self.SelectConsulta
         )
         self.buttonConsulta.place(anchor="nw", width=150, x=250, y=160)
-        self.frame1.configure(cursor="based_arrow_up", height=200, width=200)
+        self.frame1.configure(cursor="arrow", height=200, width=200)
         self.frame1.place(
             anchor="nw", height=320, relx=0.0, rely=0.0, width=480, x=0, y=0
         )
-        self.toplevel1.configure(height=200, relief="flat", takefocus=False, width=200)
-        self.toplevel1.geometry("480x320")
-        self.toplevel1.title("Database App")
+        self.frameMenuInicial.configure(height=200, relief="flat", takefocus=False, width=200)
+        self.frameMenuInicial.geometry("480x320")
+        self.frameMenuInicial.title("Database App")
 
         # Main widget
-        self.mainwindow = self.toplevel1
+        self.mainwindow = self.frameMenuInicial
+
+    def run(self):
+       self.mainwindow.mainloop()
+
+
+if __name__ == "__main__":
+    app = MainMenu()
+    app.run()
+
+
+
+
+class Menu_Select:
+    def __init__(self, master=None):
+        # build ui
+        self.Menu_Select = tk.Tk() if master is None else tk.Toplevel(master)
+        self.frame1 = ttk.Frame(self.Menu_Select)
+        self.text1 = tk.Text(self.frame1)
+        self.text1.configure(height=2, width=50)
+        _text_ = "Bem vindo ao menu de consultas avançadas, escolha:"
+        self.text1.insert("0.0", _text_)
+        self.text1.place(anchor="nw", x=40, y=20)
+        self.select_table = ttk.Entry(self.frame1)
+        self.select_table.place(anchor="nw", x=40, y=200)
+        self.tabela = ttk.Label(self.frame1)
+        self.tabela.configure(text="Tabela")
+        self.tabela.place(anchor="nw", x=80, y=180)
+        self.select_campo = ttk.Entry(self.frame1)
+        self.select_campo.place(anchor="nw", x=170, y=200)
+        self.campo = ttk.Label(self.frame1)
+        self.campo.configure(text="Campo")
+        self.campo.place(anchor="nw", x=210, y=180)
+        self.select_value = ttk.Entry(self.frame1)
+        self.select_value.place(anchor="nw", x=299, y=200)
+        self.label3 = ttk.Label(self.frame1)
+        self.label3.configure(text="Valor")
+        self.label3.place(anchor="nw", x=340, y=180)
+        self.botao_con_avan = ttk.Button(self.frame1)
+        self.botao_con_avan.configure(text="Consulte!")
+        self.botao_con_avan.place(anchor="nw", x=300, y=250)
+        self.frame1.configure(height=480, width=320)
+        self.frame1.pack(fill="both", side="top")
+        self.frame1.pack_propagate(0)
+        self.Menu_Select.configure(height=200, width=200)
+        self.Menu_Select.geometry("480x320")
+
+        # Main widget
+        self.mainwindow = self.Menu_Select
 
     def run(self):
         self.mainwindow.mainloop()
 
 
 if __name__ == "__main__":
-    app = MainMenu()
+    app = Menu_Select()
+    app.run()
+
+#!/usr/bin/python3
+import tkinter as tk
+import tkinter.ttk as ttk
+
+
+class InsertDados:
+    def __init__(self, master=None):
+        # build ui
+        self.toplevel2 = tk.Tk() if master is None else tk.Toplevel(master)
+        self.toplevel2.title('My Title')
+        self.frame2 = ttk.Frame(self.toplevel2)
+        self.label4 = ttk.Label(self.frame2)
+        self.label4.configure(text="Inserção: Selecione qual tabela você quer inserir")
+        self.label4.place(anchor="nw", x=100, y=50)
+        self.table_entry = ttk.Entry(self.frame2)
+        self.table_entry.configure(cursor="arrow")
+        self.table_entry.place(anchor="nw", x=170, y=75)
+        self.label5 = ttk.Label(self.frame2)
+        self.label5.configure(
+            cursor="arrow", text="Insira os valores a serem adicionados na tabela"
+        )
+        self.label5.place(anchor="nw", x=100, y=100)
+        self.entry_values = ttk.Entry(self.frame2)
+        self.entry_values.place(anchor="nw", x=170, y=125)
+        self.label6 = ttk.Label(self.frame2)
+        self.label6.configure(text="Nao esqueca de separar os valores com virgula")
+        self.label6.place(anchor="nw", x=100, y=150)
+        self.buttonInsertConfirm = ttk.Button(self.frame2)
+        self.buttonInsertConfirm.configure(text="Confirmar")
+        self.buttonInsertConfirm.place(anchor="nw", x=300, y=180)
+        self.label7 = ttk.Label(self.frame2)
+        self.label7.configure(text="Se quiser voltar ao menu inicial")
+        self.label7.place(anchor="nw", x=150, y=220)
+        self.buttonVoltar = ttk.Button(self.frame2)
+        self.buttonVoltar.configure(text="Voltar")
+        self.buttonVoltar.place(anchor="nw", x=300, y=250)
+        self.frame2.configure(height=200, width=200)
+        self.frame2.pack(expand="true", fill="both", side="top")
+        self.toplevel2.configure(height=480, takefocus=False, width=320)
+        self.toplevel2.geometry("480x320")
+
+        # Main widget
+        self.mainwindow = self.toplevel2
+
+    def run(self):
+        self.mainwindow.mainloop()
+
+
+if __name__ == "__main__":
+    app = InsertDados()
     app.run()
