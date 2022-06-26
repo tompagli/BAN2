@@ -131,15 +131,17 @@ def view(table):
     return rows
 
 lista_instrumento = instrumento.build(view('Instrumento'))
-lista_tocar = view('tocar')
-lista_musica = view('Musica')
-lista_disco = view('Disco')
-lista_musico = view('Musico')
-lista_endereco = view('Endereco')
-lista_banda = view('Banda')
-lista_produtor = view('Produtor')
+lista_tocar = tocar.build(view('tocar'))
+lista_musica = musica.build(view('Musica'))
+lista_disco = disco.build(view('Disco'))
+lista_musico = musico.build(view('Musico'))
+lista_endereco = endereco.build(view('Endereco'))
+lista_banda = banda.build(view('Banda'))
+lista_produtor = produtor.build(view('Produtor'))
 
 def separa_por_parametro(lista,campo,valor):
+    if lista != 'tocar':
+        lista=lista[0].lower()+lista[1:]
     lista_separada = []
     lista = globals()["lista_"+lista]
     if valor=='':
