@@ -2,6 +2,9 @@ from time import strftime
 import pymongo
 from connection import *
 
+
+
+
 def insert_db(tupla,dados):
     mydb = connect_db()
     mycol = mydb[tupla]
@@ -14,14 +17,6 @@ def insert_db(tupla,dados):
         mydict = { "nome": nome, "cod_interno": cod_interno, "cod_play":cod_play}
         x = mycol.insert_one(mydict)
         return x 
-    
-    if mycol == 'tocar':
-        dados_l = dados.split(",")
-        cod_int = str(dados_l[0]) 
-        cod_mus= str(dados_l[1]) 
-        mydict = { "cod_int": cod_int, "cod_mus": cod_mus}
-        x = mycol.insert_one(mydict)
-        return x
     
     if mycol == 'Musica':
         dados_l = dados.split(",")
