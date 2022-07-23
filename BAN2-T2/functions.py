@@ -10,6 +10,13 @@ def view(tupla):
         print(x) 
     return x
 
+def deepview(tupla,campo):
+    mydb = connect_db()
+    mycol = mydb[tupla]
+    for x in mycol.find({},{"_id": 0, campo: 1}):
+        print(x) 
+    return x
+
 def insert_db(tupla,dados):
     mydb = connect_db()
     mycol = mydb[tupla]
