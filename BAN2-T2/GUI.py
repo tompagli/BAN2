@@ -40,6 +40,60 @@
 import tkinter as tk
 import tkinter.ttk as ttk
 
+class MenuViewAvan:
+    def __init__(self, master=None) :
+        self.MenuViewAvan = tk.Tk() if master is None else tk.Toplevel(master)
+        self.MenuViewAvan.title("Menu de Consulta Avancada")
+        self.textoConsultaAvan = tk.Text(self.MenuViewAvan)
+        self.textoConsultaAvan.configure(
+            autoseparators="false", height=2, insertunfocussed="none", width=30
+        )
+        _text_ = "Selecione a tupla e o campo   que quer consultar"
+        self.textoConsultaAvan.insert("0.0", _text_)
+        self.textoConsultaAvan.place(anchor="nw", x=200, y=20)
+        self.Tupla = ttk.Label(self.MenuViewAvan)
+        self.Tupla.configure(text="Tupla")
+        self.Tupla.place(anchor="nw", x=300, y=70)
+        self.listaTupla = ttk.Combobox(self.MenuViewAvan)
+        self.listaTupla.configure(
+            exportselection="false",
+            justify="center",
+            takefocus=False,
+            values=('Instrumento','Musico','Musica','Disco'),
+        )
+        self.listaTupla.place(anchor="nw", x=250, y=90)
+        self.Campo = ttk.Label(self.MenuViewAvan)
+        self.Campo.configure(text="Campo")
+        self.Campo.place(anchor="nw", x=295, y=120)
+        self.listaCampo = ttk.Combobox(self.MenuViewAvan)
+        self.listaCampo.configure(
+            exportselection="false",
+            justify="center",
+            takefocus=False,
+            values=('titulod','data','formato','cod_mus','cod_b','nome','n_regs','cod_interno','telefone','casa','n_banda','cod_play','titulom','autor','cod_dis'),
+        )
+        self.listaCampo.place(anchor="nw", x=250, y=140)
+        self.getAvan = ttk.Button(self.MenuViewAvan)
+        self.getAvan.configure(text="Consulta Avancada")
+        self.getAvan.place(anchor="nw", x=300, y=180)
+        self.retornamainMenu = ttk.Button(self.MenuViewAvan)
+        self.retornamainMenu.configure(text="Voltar")
+        self.retornamainMenu.place(anchor="nw", x=255, y=300)
+        self.MenuViewAvan.configure(cursor="arrow", height=400, width=600)
+        self.MenuViewAvan.pack_propagate(0)
+        self.resultConsulta = ttk.Label(self.MenuViewAvan)
+        self.resultConsulta.configure(text="resultado")
+        self.resultConsulta.place(anchor="nw", x=295, y=230)
+        self.mainwindow = self.MenuViewAvan
+    def run(self):
+        self.mainwindow.mainloop()
+
+
+if __name__ == "__main__":
+    app = MenuViewAvan()
+    app.run()
+
+
 
 class MenuView:
     def __init__(self, master=None):
@@ -81,6 +135,4 @@ class MenuView:
         self.mainwindow.mainloop()
 
 
-if __name__ == "__main__":
-    app = MenuView()
-    app.run()
+
