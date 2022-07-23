@@ -19,7 +19,7 @@ def insert_db(tupla,dados):
     mydb = connect_db()
     mycol = mydb[tupla]
 
-    if mycol == 'Instrumento':
+    if mycol == 'instrumento':
         dados_l = dados.split(",")
         nome = dados_l[0] 
         cod_interno = dados_l[1] 
@@ -28,7 +28,7 @@ def insert_db(tupla,dados):
         x = mycol.insert_one(mydict)
         return x 
     
-    if mycol == 'Musica':
+    if mycol == 'musica':
         dados_l = dados.split(",")
         titulom = dados_l[0]
         autor = dados_l[1] 
@@ -38,7 +38,7 @@ def insert_db(tupla,dados):
         x = mycol.insert_one(mydict)
         return x
     
-    if mycol == 'Disco':
+    if mycol == 'disco':
         dados_l = dados.split(",")
         titulod = (dados_l[0])
         data = strftime(dados_l[1])
@@ -50,7 +50,7 @@ def insert_db(tupla,dados):
         x = mycol.insert_one(mydict)
         return x
     
-    if mycol == 'Musico':       
+    if mycol == 'musico':       
         dados_l = dados.split(",")
         nome = (dados_l[0])
         n_regs = (dados_l[1])
