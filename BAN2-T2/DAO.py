@@ -1,9 +1,22 @@
 from numpy import vdot
 import pymongo
 from functions import *
+from connection import *
+
+def view(tupla):
+    mydb = connect_db()
+    mycol = mydb[str(tupla)]
+    for x in mycol.find():
+        return x
+
+def deepview(tupla,campo):
+    mydb = connect_db()
+    mycol = mydb[tupla]
+    for x in mycol.find({},{"_id": 0, campo: 1}): 
+        return x
 
 class discoDAO:
-    def __init__(self,titulod,data,id,formato,cod_mus,cod_b):       ##def da classe
+    def __init__(self,titulod,data,id,formato,cod_mus,cod_b):       
         self.titulod = titulod
         self.data = data
         self.id = id
@@ -36,7 +49,7 @@ class discoDAO:
         return vdt
 
 class musicoDAO:
-    def __init__(self,nome,n_regs,telefone,casa,n_banda,cod_play):                    ##def da classe
+    def __init__(self,nome,n_regs,telefone,casa,n_banda,cod_play):                    
         self.nome = nome
         self.n_regs = n_regs
         self.telefone = telefone
@@ -73,7 +86,7 @@ class musicoDAO:
         return vdt
 
 class musicaDAO:
-    def __init__(self,titulom,autor,cod_mus,cod_dis):             ##def da classe
+    def __init__(self,titulom,autor,cod_mus,cod_dis):             
         self.titulom = titulom
         self.autor = autor
         self.cod_mus = cod_mus

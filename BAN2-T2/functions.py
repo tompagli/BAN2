@@ -2,19 +2,6 @@ from time import strftime
 import pymongo
 from connection import *
 
-
-def view(tupla):
-    mydb = connect_db()
-    mycol = mydb[str(tupla)]
-    for x in mycol.find():
-        return x
-
-def deepview(tupla,campo):
-    mydb = connect_db()
-    mycol = mydb[tupla]
-    for x in mycol.find({},{"_id": 0, campo: 1}): 
-        return x
-
 def insert_db(tupla,dados):
     mydb = connect_db()
     mycol = mydb[tupla]
