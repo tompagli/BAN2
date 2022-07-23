@@ -2,40 +2,49 @@ import tkinter as tk
 import tkinter.ttk as ttk
 
 
-class MainMenu:
+##Menu visualizacao
+class MenuView:
     def __init__(self, master=None):
         # build ui
-        self.mainMenu = tk.Tk() if master is None else tk.Toplevel(master)
-        self.mainMenu.title("Menu Inicial")
-        self.botaoInsert = ttk.Button(self.mainMenu)
-        self.botaoInsert.configure(text="Inserção")
-        self.botaoInsert.place(anchor="nw", height=50, width=100, x=150, y=300)
-        self.Consulta = ttk.Button(self.mainMenu)
-        self.Consulta.configure(text="Consulta")
-        self.Consulta.place(anchor="nw", height=50, width=100, x=350, y=300)
-        self.welcome = tk.Text(self.mainMenu)
-        self.welcome.configure(
-            cursor="arrow", font="TkDefaultFont", height=3, insertunfocussed="none"
+        self.MenuView = tk.Tk() if master is None else tk.Toplevel(master)
+        self.MenuView.title("Menu de Consulta Simples")
+        self.SimpleView = ttk.Button(self.MenuView)
+        self.SimpleView.configure(text="Consulta Simples")
+        self.SimpleView.place(anchor="nw", x=400, y=100)
+        self.tuplaCombo = ttk.Combobox(self.MenuView)
+        self.tuplaCombo.configure(
+            exportselection="false",
+            justify="center",
+            takefocus=False,
+            values=('Instrumento','Musico','Musica','Disco'),
         )
-        self.welcome.configure(
-            relief="flat", setgrid="false", takefocus=False, width=50
-       )
-        _text_ = "Bem vindo ao menu inicial da aplicação de manuseio     em MongoDB!"
-        self.welcome.insert("0.0", _text_)
-        self.welcome.place(anchor="nw", x=150, y=20)
-        self.mainMenu.configure(height=400, width=600)
-        self.mainMenu.pack_propagate(0)
+        self.tuplaCombo.place(anchor="nw", x=230, y=100)
+        self.textoconsultasimples = tk.Text(self.MenuView)
+        self.textoconsultasimples.configure(
+            autoseparators="false", cursor="arrow", font="TkDefaultFont", height=2
+        )
+        self.textoconsultasimples.configure(relief="flat", setgrid="false", width=30)
+        _text_ = "Seleciona qual tupla e clique na      consulta "
+        self.textoconsultasimples.insert("0.0", _text_)
+        self.textoconsultasimples.place(anchor="nw", x=210, y=10)
+        self.MenuView.configure(height=400, relief="flat", width=600)
+        self.MenuView.pack_propagate(0)
+        self.retornamainMenu = ttk.Button(self.MenuView)
+        self.retornamainMenu.configure(text="Voltar")
+        self.retornamainMenu.configure(command=self.quit)
+        self.retornamainMenu.place(anchor="nw", x=200, y=300)
+        self.ConsultaAvan = ttk.Button(self.MenuView)
+        self.ConsultaAvan.configure(text="Consulta Avancada")
+        self.ConsultaAvan.configure(command=open_deepview)
+        self.ConsultaAvan.place(anchor="nw", x=300, y=300)
 
-       # Main widget
-        self.mainwindow = self.mainMenu
-
+        # Main widget
+        self.mainwindow = self.MenuView
+        
     def run(self):
-       self.mainwindow.mainloop()
-
-
-if __name__ == "__main__":
-    app = MainMenu()
-    app.run() ##
+        self.mainwindow.mainloop()
+    def quit(self):
+     self.mainwindow.destroy()
 
 
 import tkinter as tk
@@ -79,6 +88,7 @@ class MenuViewAvan:
         self.getAvan.place(anchor="nw", x=300, y=180)
         self.retornamainMenu = ttk.Button(self.MenuViewAvan)
         self.retornamainMenu.configure(text="Voltar")
+        self.retornamainMenu.configure(command=self.quit)
         self.retornamainMenu.place(anchor="nw", x=255, y=300)
         self.MenuViewAvan.configure(cursor="arrow", height=400, width=600)
         self.MenuViewAvan.pack_propagate(0)
@@ -88,87 +98,56 @@ class MenuViewAvan:
         self.mainwindow = self.MenuViewAvan
     def run(self):
         self.mainwindow.mainloop()
+    def quit(self):
+     self.mainwindow.destroy()
 
-##Menu visualizacao
-class MenuView:
+class menuInsere:
     def __init__(self, master=None):
         # build ui
-        self.MenuView = tk.Tk() if master is None else tk.Toplevel(master)
-        self.MenuView.title("Menu de Consulta Simples")
-        self.SimpleView = ttk.Button(self.MenuView)
-        self.SimpleView.configure(text="Consulta Simples")
-        self.SimpleView.place(anchor="nw", x=400, y=100)
-        self.tuplaCombo = ttk.Combobox(self.MenuView)
-        self.tuplaCombo.configure(
-            exportselection="false",
-            justify="center",
-            takefocus=False,
-            values=('Instrumento','Musico','Musica','Disco'),
-        )
-        self.tuplaCombo.place(anchor="nw", x=230, y=100)
-        self.textoconsultasimples = tk.Text(self.MenuView)
-        self.textoconsultasimples.configure(
-            autoseparators="false", cursor="arrow", font="TkDefaultFont", height=2
-        )
-        self.textoconsultasimples.configure(relief="flat", setgrid="false", width=30)
-        _text_ = "Seleciona qual tupla e clique na      consulta "
-        self.textoconsultasimples.insert("0.0", _text_)
-        self.textoconsultasimples.place(anchor="nw", x=210, y=10)
-        self.MenuView.configure(height=400, relief="flat", width=600)
-        self.MenuView.pack_propagate(0)
-        self.retornamainMenu = ttk.Button(self.MenuView)
-        self.retornamainMenu.configure(text="Voltar")
-        self.retornamainMenu.place(anchor="nw", x=200, y=300)
-        self.ConsultaAvan = ttk.Button(self.MenuView)
-        self.ConsultaAvan.configure(text="Consulta Avancada")
-        self.ConsultaAvan.place(anchor="nw", x=300, y=300)
-
-        # Main widget
-        self.mainwindow = self.MenuView
-
-    def run(self):
-        self.mainwindow.mainloop()
-
-
-
-class menuInsertWhat:
-    def __init__(self, master=None):
-        # build ui
-        self.menuInsertWhat = tk.Tk() if master is None else tk.Toplevel(master)
-        self.textoinsereoq = tk.Text(self.menuInsertWhat)
+        self.menuInsere = tk.Tk() if master is None else tk.Toplevel(master)
+        self.menuInsere.title("Menu de insercao")
+        self.textoinsereoq = tk.Text(self.menuInsere)
         self.textoinsereoq.configure(autoseparators="false", height=1, width=30)
         _text_ = "Escolha em qual tupla inserir"
         self.textoinsereoq.insert("0.0", _text_)
         self.textoinsereoq.place(anchor="nw", x=200, y=40)
-        self.botaoMenuInstrumento = ttk.Button(self.menuInsertWhat)
+        self.botaoMenuInstrumento = ttk.Button(self.menuInsere)
         self.botaoMenuInstrumento.configure(text="Instrumento")
+        self.botaoMenuInstrumento.configure(command=open_instrumento)
         self.botaoMenuInstrumento.place(anchor="nw", x=295, y=80)
-        self.botaoMenuMusico = ttk.Button(self.menuInsertWhat)
+        self.botaoMenuMusico = ttk.Button(self.menuInsere)
         self.botaoMenuMusico.configure(text="Musico")
+        self.botaoMenuMusico.configure(command=open_musico)
         self.botaoMenuMusico.place(anchor="nw", x=300, y=120)
-        self.botaoMenuMusica = ttk.Button(self.menuInsertWhat)
+        self.botaoMenuMusica = ttk.Button(self.menuInsere)
         self.botaoMenuMusica.configure(text="Musica")
+        self.botaoMenuMusica.configure(command=open_musica)
         self.botaoMenuMusica.place(anchor="nw", x=300, y=160)
-        self.botaoMenuDisco = ttk.Button(self.menuInsertWhat)
+        self.botaoMenuDisco = ttk.Button(self.menuInsere)
         self.botaoMenuDisco.configure(text="Disco")
+        self.botaoMenuDisco.configure(command=open_disco)
         self.botaoMenuDisco.place(anchor="nw", x=300, y=200)
-        self.retornamainMenu = ttk.Button(self.menuInsertWhat)
+        self.retornamainMenu = ttk.Button(self.menuInsere)
         self.retornamainMenu.configure(text="Voltar")
+        self.retornamainMenu.configure(command=self.quit)
         self.retornamainMenu.place(anchor="nw", x=300, y=300)
-        self.menuInsertWhat.configure(height=400, width=600)
-        self.menuInsertWhat.pack_propagate(0)
+        self.menuInsere.configure(height=400, width=600)
+        self.menuInsere.pack_propagate(0)
 
         # Main widget
-        self.mainwindow = self.menuInsertWhat
+        self.mainwindow = self.menuInsere
 
     def run(self):
         self.mainwindow.mainloop()
+    def quit(self):
+     self.mainwindow.destroy()
 
 
 class MenuInsereDisco:
     def __init__(self, master=None):
         # build ui
         self.MenuInsereDisco = tk.Tk() if master is None else tk.Toplevel(master)
+        self.MenuInsereDisco.title("Menu de insercao em disco")
         self.TextoInsere = tk.Text(self.MenuInsereDisco)
         self.TextoInsere.configure(height=3, width=40)
         _text_ = "Insira os dados que vc pretende incluir no banco de dados a partir da tupla"
@@ -194,6 +173,7 @@ class MenuInsereDisco:
         self.entryiddisco.place(anchor="nw", x=255, y=200)
         self.retornamainMenu = ttk.Button(self.MenuInsereDisco)
         self.retornamainMenu.configure(text="Voltar")
+        self.retornamainMenu.configure(command=self.quit)
         self.retornamainMenu.place(anchor="nw", x=350, y=350)
         self.botaoInsereDisco = ttk.Button(self.MenuInsereDisco)
         self.botaoInsereDisco.configure(text="Insere")
@@ -223,6 +203,8 @@ class MenuInsereDisco:
 
     def run(self):
         self.mainwindow.mainloop()
+    def quit(self):
+     self.mainwindow.destroy()
 
 
 ##menu insercao instrumento
@@ -257,6 +239,7 @@ class MenuInsereInstrumento:
         self.entrycodplayinstrumento.place(anchor="nw", x=255, y=220)
         self.retornamainMenu = ttk.Button(self.MenuInsereInstrumento)
         self.retornamainMenu.configure(text="Voltar")
+        self.retornamainMenu.configure(command=self.quit)
         self.retornamainMenu.place(anchor="nw", x=350, y=250)
         self.botaoInsereInstrumento = ttk.Button(self.MenuInsereInstrumento)
         self.botaoInsereInstrumento.configure(text="Insere")
@@ -271,15 +254,15 @@ class MenuInsereInstrumento:
 
     def run(self):
         self.mainwindow.mainloop()
+    def quit(self):
+     self.mainwindow.destroy()
 
-if __name__ == "__main__":
-    app = MenuInsereInstrumento()
-    app.run()
 
 class MenuInsereMusico:
     def __init__(self, master=None):
         # build ui
         self.MenuInsereMusico = tk.Tk() if master is None else tk.Toplevel(master)
+        self.MenuInsereMusico.title("Menu de insercao em musico")
         self.TextoInsere = tk.Text(self.MenuInsereMusico)
         self.TextoInsere.configure(height=3, width=40)
         _text_ = "Insira os dados que vc pretende incluir no banco de dados a partir da tupla"
@@ -305,6 +288,7 @@ class MenuInsereMusico:
         self.entrytelefonemusico.place(anchor="nw", x=255, y=200)
         self.retornamainMenu = ttk.Button(self.MenuInsereMusico)
         self.retornamainMenu.configure(text="Voltar")
+        self.retornamainMenu.configure(command=self.quit)
         self.retornamainMenu.place(anchor="nw", x=350, y=350)
         self.botaoInsereMusico = ttk.Button(self.MenuInsereMusico)
         self.botaoInsereMusico.configure(text="Insere")
@@ -334,11 +318,14 @@ class MenuInsereMusico:
 
     def run(self):
         self.mainwindow.mainloop()
+    def quit(self):
+     self.mainwindow.destroy()
 
 class MenuInsereMusica:
     def __init__(self, master=None):
         # build ui
         self.MenuInsereMusica = tk.Tk() if master is None else tk.Toplevel(master)
+        self.MenuInsereMusica.title("Menu de insercao em musica")
         self.TextoInsere = tk.Text(self.MenuInsereMusica)
         self.TextoInsere.configure(height=3, width=40)
         _text_ = "Insira os dados que vc pretende incluir no banco de dados a partir da tupla"
@@ -364,6 +351,7 @@ class MenuInsereMusica:
         self.entrycodmusmusica.place(anchor="nw", x=255, y=200)
         self.retornamainMenu = ttk.Button(self.MenuInsereMusica)
         self.retornamainMenu.configure(text="Voltar")
+        self.retornamainMenu.configure(command=self.quit)
         self.retornamainMenu.place(anchor="nw", x=350, y=350)
         self.botaoInsereMusica = ttk.Button(self.MenuInsereMusica)
         self.botaoInsereMusica.configure(text="Insere")
@@ -383,3 +371,70 @@ class MenuInsereMusica:
 
     def run(self):
         self.mainwindow.mainloop()
+    def quit(self):
+     self.mainwindow.destroy()
+
+def open_view():
+     app = MenuView() ##chamada da janela de insercao
+     app.run()
+
+def open_deepview():
+    app = MenuViewAvan()
+    app.run()
+
+def open_insert():
+    app = menuInsere()
+    app.run()
+
+def open_disco():
+    app = MenuInsereDisco()
+    app.run()
+
+def open_musico():
+    app = MenuInsereMusico()
+    app.run()
+
+def open_musica():
+    app = MenuInsereMusica()
+    app.run()
+
+def open_instrumento():
+    app = MenuInsereInstrumento()
+    app.run()
+
+class MainMenu:
+    def __init__(self, master=None):
+        # build ui
+        self.mainMenu = tk.Tk() if master is None else tk.Toplevel(master)
+        self.mainMenu.title("Menu Inicial")
+        self.botaoInsert = ttk.Button(self.mainMenu)
+        self.botaoInsert.configure(text="Inserção")
+        self.botaoInsert.configure(command=open_insert)
+        self.botaoInsert.place(anchor="nw", height=50, width=100, x=150, y=300)
+        self.Consulta = ttk.Button(self.mainMenu)
+        self.Consulta.configure(text="Consulta")
+        self.Consulta.configure(command=open_view)
+        self.Consulta.place(anchor="nw", height=50, width=100, x=350, y=300)
+        self.welcome = tk.Text(self.mainMenu)
+        self.welcome.configure(
+            cursor="arrow", font="TkDefaultFont", height=3, insertunfocussed="none"
+        )
+        self.welcome.configure(
+            relief="flat", setgrid="false", takefocus=False, width=50
+       )
+        _text_ = "Bem vindo ao menu inicial da aplicação de manuseio     em MongoDB!"
+        self.welcome.insert("0.0", _text_)
+        self.welcome.place(anchor="nw", x=150, y=20)
+        self.mainMenu.configure(height=400, width=600)
+        self.mainMenu.pack_propagate(0)
+
+       # Main widget
+        self.mainwindow = self.mainMenu
+
+    def run(self):
+       self.mainwindow.mainloop()
+
+
+if __name__ == "__main__":
+    app = MainMenu()
+    app.run() ##
