@@ -3,7 +3,12 @@ import pymongo
 from connection import *
 
 
-
+def view(tupla):
+    mydb = connect_db()
+    mycol = mydb[tupla]
+    for x in mycol.find():
+        print(x) 
+    return x
 
 def insert_db(tupla,dados):
     mydb = connect_db()
