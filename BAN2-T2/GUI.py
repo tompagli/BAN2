@@ -1,5 +1,7 @@
 import tkinter as tk
 import tkinter.ttk as ttk
+from DAO import *
+
 
 
 ##Menu visualizacao
@@ -8,17 +10,21 @@ class MenuView:
         # build ui
         self.MenuView = tk.Tk() if master is None else tk.Toplevel(master)
         self.MenuView.title("Menu de Consulta Simples")
-        self.SimpleView = ttk.Button(self.MenuView)
-        self.SimpleView.configure(text="Consulta Simples")
-        self.SimpleView.place(anchor="nw", x=400, y=100)
+       
+        ##label para printar
+        self.labelprint = ttk.Label(self.MenuView)
+        self.labelprint.configure(text="Tupla")
+        self.labelprint.place(anchor="nw", x=300, y=70)
+        ##combobox das tuplas
         self.tuplaCombo = ttk.Combobox(self.MenuView)
         self.tuplaCombo.configure(
             exportselection="false",
             justify="center",
             takefocus=False,
-            values=('Instrumento','Musico','Musica','Disco'),
+            values=('instrumento','musico','musica','disco'),
         )
         self.tuplaCombo.place(anchor="nw", x=230, y=100)
+        ##texto do menu
         self.textoconsultasimples = tk.Text(self.MenuView)
         self.textoconsultasimples.configure(
             autoseparators="false", cursor="arrow", font="TkDefaultFont", height=2
@@ -29,27 +35,39 @@ class MenuView:
         self.textoconsultasimples.place(anchor="nw", x=210, y=10)
         self.MenuView.configure(height=400, relief="flat", width=600)
         self.MenuView.pack_propagate(0)
+        ## botao voltar 
         self.retornamainMenu = ttk.Button(self.MenuView)
         self.retornamainMenu.configure(text="Voltar")
         self.retornamainMenu.configure(command=self.quit)
         self.retornamainMenu.place(anchor="nw", x=200, y=300)
+        ## botao avancada
         self.ConsultaAvan = ttk.Button(self.MenuView)
         self.ConsultaAvan.configure(text="Consulta Avancada")
         self.ConsultaAvan.configure(command=open_deepview)
         self.ConsultaAvan.place(anchor="nw", x=300, y=300)
-
+        ##botao de consulta
+        self.SimpleView = ttk.Button(self.MenuView)
+        self.SimpleView.configure(text="Consulta Simples")
+        self.SimpleView.configure(command=self.print_consulta)
+        self.SimpleView.place(anchor="nw", x=400, y=100)
         # Main widget
         self.mainwindow = self.MenuView
-        
+    
+
+    def print_consulta(self):
+        tupla = self.tuplaCombo.get()
+        x = view(tupla)
+        self.labelprint = ttk.Label(self.MenuView)
+        self.labelprint.configure(text=x)
+        self.labelprint.place(anchor="nw", x=100, y=150)
+
+
     def run(self):
         self.mainwindow.mainloop()
     def quit(self):
      self.mainwindow.destroy()
 
 
-import tkinter as tk
-import tkinter.ttk as ttk
-##menu visualizacao avancada
 class MenuViewAvan:
     def __init__(self, master=None) :
         self.MenuViewAvan = tk.Tk() if master is None else tk.Toplevel(master)
@@ -69,7 +87,7 @@ class MenuViewAvan:
             exportselection="false",
             justify="center",
             takefocus=False,
-            values=('Instrumento','Musico','Musica','Disco'),
+            values=('instrumento','musico','musica','disco'),
         )
         self.listaTupla.place(anchor="nw", x=250, y=90)
         self.Campo = ttk.Label(self.MenuViewAvan)
@@ -85,6 +103,7 @@ class MenuViewAvan:
         self.listaCampo.place(anchor="nw", x=250, y=140)
         self.getAvan = ttk.Button(self.MenuViewAvan)
         self.getAvan.configure(text="Consulta Avancada")
+        self.getAvan.configure(command=self.print_consulta)
         self.getAvan.place(anchor="nw", x=300, y=180)
         self.retornamainMenu = ttk.Button(self.MenuViewAvan)
         self.retornamainMenu.configure(text="Voltar")
@@ -92,12 +111,19 @@ class MenuViewAvan:
         self.retornamainMenu.place(anchor="nw", x=255, y=300)
         self.MenuViewAvan.configure(cursor="arrow", height=400, width=600)
         self.MenuViewAvan.pack_propagate(0)
-        self.resultConsulta = ttk.Label(self.MenuViewAvan)
-        self.resultConsulta.configure(text="resultado")
-        self.resultConsulta.place(anchor="nw", x=295, y=230)
         self.mainwindow = self.MenuViewAvan
+    
+    def print_consulta(self):
+        tupla = self.listaTupla.get()
+        campo = self.listaCampo.get()
+        x = deepview(tupla,campo)
+        self.labelprint = ttk.Label(self.MenuViewAvan)
+        self.labelprint.configure(text=x)
+        self.labelprint.place(anchor="nw", x=295, y=230)
+
     def run(self):
         self.mainwindow.mainloop()
+
     def quit(self):
      self.mainwindow.destroy()
 
