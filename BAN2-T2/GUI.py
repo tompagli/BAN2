@@ -1,8 +1,7 @@
 import tkinter as tk
 import tkinter.ttk as ttk
+import pymongo
 from DAO import *
-
-
 
 ##Menu visualizacao
 class MenuView:
@@ -162,7 +161,6 @@ class menuInsere:
 
         # Main widget
         self.mainwindow = self.menuInsere
-
     def run(self):
         self.mainwindow.mainloop()
     def quit(self):
@@ -203,6 +201,7 @@ class MenuInsereDisco:
         self.retornamainMenu.place(anchor="nw", x=350, y=350)
         self.botaoInsereDisco = ttk.Button(self.MenuInsereDisco)
         self.botaoInsereDisco.configure(text="Insere")
+        self.botaoInsereDisco.configure(command=self.insere_bd_disco)
         self.botaoInsereDisco.place(anchor="nw", x=200, y=350)
         self.labelformato = ttk.Label(self.MenuInsereDisco)
         self.labelformato.configure(text="formato")
@@ -226,7 +225,18 @@ class MenuInsereDisco:
 
         # Main widget
         self.mainwindow = self.MenuInsereDisco
-
+    def insere_bd_disco(self):
+        mydb = connect_db()
+        mycol = mydb['disco']
+        titulod = self.entrytitulodisco.get()
+        data = self.entrydatadisco.get()
+        id = self.entryiddisco.get()
+        formato = self.entryformatodisco.get()
+        cod_mus = self.entrycodmusdisco.get()
+        cod_b = self.entrycodbdisco.get()
+        mydict = {"titulod": titulod, "data": data, "id": id, "formato": formato, "cod_mus": cod_mus, "cod_b": cod_b}
+        x = mycol.insert_one(mydict)
+        return x
     def run(self):
         self.mainwindow.mainloop()
     def quit(self):
@@ -269,6 +279,7 @@ class MenuInsereInstrumento:
         self.retornamainMenu.place(anchor="nw", x=350, y=250)
         self.botaoInsereInstrumento = ttk.Button(self.MenuInsereInstrumento)
         self.botaoInsereInstrumento.configure(text="Insere")
+        self.botaoInsereInstrumento.configure(command=self.insere_bd_instrumento)
         self.botaoInsereInstrumento.place(anchor="nw", x=200, y=250)
         self.MenuInsereInstrumento.configure(
             cursor="arrow", height=400, takefocus=False, width=600
@@ -278,6 +289,16 @@ class MenuInsereInstrumento:
          
         self.mainwindow = self.MenuInsereInstrumento
 
+    def insere_bd_instrumento(self):
+        mydb = connect_db()
+        mycol = mydb['instrumento']
+        nome = self.entrynomeinstrumento.get() 
+        cod_interno = self.entrycodintinstrumento.get() 
+        cod_play = self.entrycodplayinstrumento.get() 
+        mydict = { "nome": nome, "cod_interno": cod_interno, "cod_play":cod_play}
+        x = mycol.insert_one(mydict)
+        return x
+    
     def run(self):
         self.mainwindow.mainloop()
     def quit(self):
@@ -318,6 +339,7 @@ class MenuInsereMusico:
         self.retornamainMenu.place(anchor="nw", x=350, y=350)
         self.botaoInsereMusico = ttk.Button(self.MenuInsereMusico)
         self.botaoInsereMusico.configure(text="Insere")
+        self.botaoInsereMusico.configure(command=self.insere_bd_musico)
         self.botaoInsereMusico.place(anchor="nw", x=200, y=350)
         self.labelcasa = ttk.Label(self.MenuInsereMusico)
         self.labelcasa.configure(text="casa")
@@ -342,6 +364,19 @@ class MenuInsereMusico:
         # Main widget
         self.mainwindow = self.MenuInsereMusico
 
+    def insere_bd_musico(self):
+        mydb = connect_db()
+        mycol = mydb['musico']
+        nome = self.entrynomemusico.get()
+        n_regs = self.entrynregsmusico.get()
+        telefone = self.entrytelefonemusico.get()
+        casa = self.entrycasamusico.get()
+        n_banda = self.entrynbandamusico.get()
+        cod_play = self.entrycodplaymusico.get()
+        mydict = {"nome": nome, "n_regs": n_regs, "telefone": telefone, "casa": casa, "n_banda":n_banda, "cod_play": cod_play}
+        x = mycol.insert_one(mydict)
+        return x
+    
     def run(self):
         self.mainwindow.mainloop()
     def quit(self):
@@ -381,6 +416,7 @@ class MenuInsereMusica:
         self.retornamainMenu.place(anchor="nw", x=350, y=350)
         self.botaoInsereMusica = ttk.Button(self.MenuInsereMusica)
         self.botaoInsereMusica.configure(text="Insere")
+        self.botaoInsereMusica.configure(command=self.insere_bd_musica)
         self.botaoInsereMusica.place(anchor="nw", x=200, y=350)
         self.labelcod_dis = ttk.Label(self.MenuInsereMusica)
         self.labelcod_dis.configure(text="cod_dis")
@@ -394,6 +430,17 @@ class MenuInsereMusica:
 
         # Main widget
         self.mainwindow = self.MenuInsereMusica
+
+    def insere_bd_musica(self):
+        mydb = connect_db()
+        mycol = mydb['musica']
+        titulom = self.entrytitulomusica.get()
+        autor = self.entryautormusica.get()
+        cod_mus= self.entrycodmusmusica.get()
+        cod_dis= self.entrycoddismusica.get()
+        mydict = { "titulom": titulom, "autor": autor, "cod_mus":cod_mus, "cod_dis": cod_dis}
+        x = mycol.insert_one(mydict)
+        return x
 
     def run(self):
         self.mainwindow.mainloop()
