@@ -1,5 +1,4 @@
 ## arquivo de conexão do MongoDB com a aplicação python
-## eu n aguento mais esse semestre
 
 def connect_db():
     from pymongo import MongoClient
