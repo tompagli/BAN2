@@ -1,6 +1,5 @@
 from numpy import vdot
 import pymongo
-from functions import *
 from connection import *
 
 def view(tupla):

@@ -506,8 +506,3 @@ class MainMenu:
 
     def run(self):
        self.mainwindow.mainloop()
-
-
-if __name__ == "__main__":
-    app = MainMenu()
-    app.run() ##
